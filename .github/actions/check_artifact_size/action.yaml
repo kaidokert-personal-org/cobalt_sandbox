@@ -143,8 +143,7 @@ runs:
         id: add-label
         if: |
           steps.check-artifact-size.outputs.addLabel &&
-          github.event.pull_request.merged == true &&
-          github.event.pull_request.merge_commit_sha != null
+          github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           curl -s -X POST -H "Authorization: token ${{ inputs.token }}" \
